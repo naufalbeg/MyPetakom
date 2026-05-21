@@ -1,0 +1,194 @@
+/* Reset default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body and background */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* Header (topbar) */
+.topbar {
+  background-color: #00264d;
+  color: white;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.app-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  margin-right: 10px;
+}
+
+.btn-logout {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-logout:hover {
+  background-color: #c9302c;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+
+  width: 200px;
+  height: calc(100vh - 60px);
+  background-color: #0e2a47;
+  color: white;
+  padding-top: 20px;
+}
+
+.sidebar-profile {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-pic {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-label {
+  margin-top: 8px;
+  font-weight: bold;
+}
+
+.sidebar-nav ul {
+  list-style-type: none;
+}
+
+.sidebar-nav li {
+  padding: 10px 20px;
+  transition: background-color 0.3s;
+}
+
+.sidebar-nav li.active,
+.sidebar-nav li:hover {
+  background-color: #c62828;
+}
+
+.sidebar-nav a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+}
+
+/* Main content area */
+.main-content {
+  margin-left: 220px;
+  padding: 40px 30px;
+}
+
+.main-content h2 {
+  margin-bottom: 30px;
+  font-size: 24px;
+  color: #222;
+}
+
+/* QR section styling */
+.qr-area {
+  background-color: white;
+  padding: 30px 20px;
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.qr-frame {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  border: 2px dashed #aaa;
+  margin-bottom: 20px;
+}
+
+/* File input hidden */
+#qrInput {
+  display: none;
+}
+
+/* Buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 5px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Responsive (optional for mobile) */
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    top: 0;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .qr-area {
+    width: 100%;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    padding: 10px;
+  }
+
+  .header-right {
+    align-self: flex-end;
+  }
+}

@@ -1,0 +1,176 @@
+/* ===== Base & Layout ===== */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  color: #333;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #002240;
+  padding: 10px 20px;
+  color: #fff;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-container img {
+  height: 40px;
+}
+
+.logo-container h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logout-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 3px;
+  background: #cc0000;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Main wrapper */
+.main-content {
+  display: flex;
+  min-height: calc(100vh - 60px);
+}
+
+/* Sidebar */
+.sidebar {
+  width: 200px;
+  background: #002240;
+  color: #ecf0f1;
+}
+
+.profile {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.profile img {
+  width: 60px;
+  border-radius: 50%;
+}
+
+.profile p {
+  margin: 10px 0 0;
+  font-weight: bold;
+}
+
+.nav-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-menu a {
+  display: block;
+  padding: 12px 20px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav-menu li.active a,
+.nav-menu a:hover {
+  background: #cc0000;
+}
+
+/* Content area */
+.content {
+  flex: 1;
+  padding: 20px;
+  overflow-x: auto;
+}
+
+.content h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+/* ===== Table ===== */
+.table-wrap {
+  background: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  overflow-x: auto;
+}
+
+#attd-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+#attd-table th,
+#attd-table td {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+#attd-table th {
+  background: #003366;
+  color: #ecf0f1;
+  font-size: 14px;
+}
+
+#attd-table td img {
+  width: 50px;
+  height: 50px;
+}
+
+/* Editable cell focus */
+#attd-table td[contenteditable]:focus {
+  outline: 2px solid #3498db;
+  background: #ecf6fd;
+}
+
+/* ===== Buttons ===== */
+.delete-btn {
+  padding: 4px 8px;
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #c0392b;
+}
+
+.actions {
+  margin-top: 15px;
+  text-align: right;
+}
+
+#save-btn {
+  padding: 8px 16px;
+  background: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#save-btn:hover {
+  background: #218838;
+}

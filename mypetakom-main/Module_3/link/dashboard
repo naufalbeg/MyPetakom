@@ -1,0 +1,33 @@
+student dashboard
+
+                <li class="menu-item <?= isActive('scanatd.php','Module_3') ?>">
+                  <a href="../Module_3/scanatd.php">
+                    <i class="fas fa-camera"></i> Scan Attendance
+                  </a>
+                </li>
+
+                <li class="menu-item <?= isActive('historyatd.php','Module_3') ?>">
+                  <a href="../Module_3/historyatd.php">
+                    <i class="fas fa-qrcode"></i> Attendance History
+                  </a>
+                </li>
+
+advisor dashboard (put under Event Qr)
+
+                <li class="menu-item <?= isActive('createatd.php','Module_3') ?>">
+                  <a href="../Module_3/createatd.php">
+                    <i class="fas fa-id-card"></i> Create Attendance
+                  </a>
+                </li>
+                <li class="menu-item <?= isActive('manageatd.php','Module_3') ?>">
+                  <a href="../Module_3/manageatd.php">
+                    <i class="fas fa-tasks"></i> Manage Attendance
+                  </a>
+                </li>
+                <li class="menu-item <?= isActive('viewatd.php','Module_3') ?>">
+                  <a href="../Module_3/viewatd.php">
+                    <i class="fas fa-eye"></i> View Attendance
+                  </a>
+                </li>
+
+
