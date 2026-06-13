@@ -1,6 +1,6 @@
 <?php
-session_start();
-
+require_once '../Module_1/session_config.php';
+requireLogin();
 include '../HADER_SIDER_FOOTER/HST.PHP';
 ?>
 <!DOCTYPE html>
