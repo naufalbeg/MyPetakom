@@ -1,6 +1,8 @@
 <?php
 // createatd.php
-include '../../Databased/db_connect.php';
+require_once '../Module_1/session_config.php';
+requireLogin();
+include '../Databased/db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // sanitize & gather
@@ -44,14 +46,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $conn->prepare(
               "INSERT INTO attendance 
                 (event_id, user_id, attendance_qr, status_attd, timestamp, location_verified)
-               VALUES (?, ?, ?, 'present', NOW(), ?)"
+               VALUES (?, ?, ?, 'present', NOW(), 1)"
             );
             $stmt->bind_param(
-              "iiss",
+              "iis",
               $event_id,
               $user_id,
-              $qr_data,
-              $locationName
+              $qr_data
             );
 
     if ($stmt->execute()) {
@@ -247,3 +248,4 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
   </script>
 </body>
 </html>
+
