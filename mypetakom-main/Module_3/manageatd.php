@@ -1,5 +1,7 @@
 <?php
-include '../../Databased/db_connect.php';
+require_once '../Module_1/session_config.php';
+requireLogin();
+include '../Databased/db_connect.php';
 
 // — Handle Delete
 if (isset($_GET['delete_id'])) {
@@ -44,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['updates'])) {
 }
 
 // — Fetch all records with proper joins
-$res = $conn->query("SELECT a.*, e.title as event_name, u.username as attendance_name, e.location
+$res = $conn->query("SELECT a.*, e.title as event_name, u.username as attendance_name, e.geographic_location as location
                      FROM attendance a 
                      JOIN events e ON a.event_id = e.event_id 
                      JOIN users u ON a.user_id = u.user_id 
@@ -61,7 +63,17 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
 </head>
 <body>
     <section class="content">
-        <h2>Manage Attendance</h2>
+    <h2>Manage Attendance</h2>
+    <div class="export-bar" style="display:flex;gap:10px;margin:12px 0 16px 0;justify-content:flex-end;">
+            <a href="exportatd.php?format=csv"
+               style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:#217346;color:#fff;border-radius:4px;font-size:13px;font-weight:600;text-decoration:none;">
+                &#128196; Export CSV
+            </a>
+            <a href="exportatd.php?format=pdf" target="_blank"
+               style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:#c0392b;color:#fff;border-radius:4px;font-size:13px;font-weight:600;text-decoration:none;">
+                &#128438; Export PDF
+            </a>
+        </div>
         <div class="table-wrap">
             <table id="attd-table">
                 <thead>
