@@ -1,5 +1,5 @@
 <?php
-include '../../Databased/db_connect.php';
+include '../Databased/db_connect.php';
 
 if (!isset($_GET['data'])) {
   http_response_code(400);
