@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once '../Module_1/session_config.php';
+requireLogin();
 $eventId = $_GET['event_id'] ?? 0;
 
 include '../HADER_SIDER_FOOTER/HST.PHP';
@@ -29,7 +30,7 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
       <input type="hidden" name="event_id" value="<?= htmlspecialchars($eventId) ?>">
 
       <div class="field">
-        <label for="student_id">Student ID:</label>
+      <label for="student_id">Student ID Card (e.g. CB23063):</label>
         <input type="text" id="student_id" name="student_id" required>
       </div>
 
@@ -86,3 +87,4 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
 
 </body>
 </html>
+
