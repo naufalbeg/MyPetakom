@@ -1,6 +1,7 @@
 <?php
-session_start();
-include '../../Databased/db_connect.php';
+require_once '../Module_1/session_config.php';
+requireLogin();
+include '../Databased/db_connect.php';
 
 // Get all attendance events
 $sql = "SELECT a.*, e.title as event_name, u.username, e.start_date 
@@ -77,3 +78,4 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
   </div>
 </body>
 </html>
+
