@@ -1,6 +1,7 @@
 <?php
-session_start();
-include '../../Databased/db_connect.php';
+require_once '../Module_1/session_config.php';
+requireLogin();
+include '../Databased/db_connect.php';
 
 $sql = "SELECT a.*, e.title as event_name, u.username
         FROM attendance a
@@ -64,7 +65,7 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
           SELECT 
             u.username as attendance_name,
             e.title as event_name, 
-            e.location as location_name,
+            a.location_verified as location_name,
             e.start_date,
             e.end_date,
             e.start_date as attendance_date,
@@ -101,3 +102,4 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
   </div>
 </body>
 </html>
+
