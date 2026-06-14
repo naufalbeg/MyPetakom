@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../../Databased/db_connect.php';
+include '../Databased/db_connect.php';
 
 // 1) Auth + look up real user_id
 if (
@@ -438,6 +438,17 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
                                         </div>
                                     <?php endif; ?>
                                 </div>
+
+                                <?php if ($claim['claim_status'] === 'rejected' && !empty($claim['rejection_reason'])): ?>
+                                    <!-- CR-04-001: Rejection reason notice -->
+                                    <div class="rejection-notice">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                        <div>
+                                            <strong>Reason for rejection:</strong>
+                                            <p><?= nl2br(htmlspecialchars($claim['rejection_reason'])) ?></p>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
                                 
                                 <?php if ($claim['claim_status'] === 'pending'): ?>
                                     <div class="claim-actions">

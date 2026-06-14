@@ -1,5 +1,5 @@
 <?php
-include '../../Databased/db_connect.php';
+include '../Databased/db_connect.php';
 
 // Fetch only upcoming events
 $sql = "SELECT * FROM events WHERE start_date >= CURDATE() ORDER BY start_date ASC";

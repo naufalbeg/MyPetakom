@@ -7,7 +7,7 @@ session_start();
 // 1) Fetch profile_info if not already
 if (!isset($profile_info)) {
     if (!isset($conn)) {
-        include '../../Databased/db_connect.php';
+        include '../Databased/db_connect.php';
     }
 
     // Determine the role (either set earlier or from “userRole”)

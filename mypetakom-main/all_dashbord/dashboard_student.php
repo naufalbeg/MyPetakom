@@ -1,6 +1,6 @@
   <?php
 session_start();
-  include '../../Databased/db_connect.php';
+  include '../Databased/db_connect.php';
  // 1️ Check the existing session keys
 if (
     !isset($_SESSION['username'], $_SESSION['userRole'])

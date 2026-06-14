@@ -461,6 +461,30 @@
   border: 1px solid #f1b0b7;
 }
 
+/* CR-04-001: Rejection reason notice box on student claim card */
+.rejection-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f1b0b7;
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  font-size: .85rem;
+  line-height: 1.5;
+}
+.rejection-notice i {
+  margin-top: 2px;
+}
+.rejection-notice strong {
+  display: block;
+}
+.rejection-notice p {
+  margin: 4px 0 0;
+}
+
 .claim-details {
   color: var(--text-light);
   font-size: 0.9rem;

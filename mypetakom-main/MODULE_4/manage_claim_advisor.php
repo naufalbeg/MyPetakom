@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../../Databased/db_connect.php';
+include '../Databased/db_connect.php';
 
 // Authentication check
 if (!isset($_SESSION['username'], $_SESSION['userRole']) || $_SESSION['userRole'] !== 'advisor') {
@@ -15,10 +15,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if ($application_id && ($action === 'approve' || $action === 'reject')) {
         $status = ($action === 'approve') ? 'approved' : 'rejected';
-        
-        $stmt = $conn->prepare("UPDATE meritapplication SET claim_status = ? WHERE application_id = ?");
-        $stmt->bind_param("si", $status, $application_id);
-        
+
+        if ($action === 'reject') {
+            // CR-04-001: capture the advisor's reason so the student can see it
+            $rejection_reason = trim($_POST['rejection_reason'] ?? '');
+
+            if ($rejection_reason === '') {
+                $_SESSION['message'] = "Please provide a reason before rejecting this claim.";
+                $_SESSION['message_type'] = 'error';
+                header("Location: " . $_SERVER['PHP_SELF']);
+                exit;
+            }
+
+            $stmt = $conn->prepare("UPDATE meritapplication SET claim_status = ?, rejection_reason = ? WHERE application_id = ?");
+            $stmt->bind_param("ssi", $status, $rejection_reason, $application_id);
+        } else {
+            // Approving clears any rejection reason left over from a previous decision
+            $stmt = $conn->prepare("UPDATE meritapplication SET claim_status = ?, rejection_reason = NULL WHERE application_id = ?");
+            $stmt->bind_param("si", $status, $application_id);
+        }
+
         if ($stmt->execute()) {
             $_SESSION['message'] = "Claim successfully " . $status;
             $_SESSION['message_type'] = 'success';
@@ -243,12 +259,12 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
                                                     onclick="return confirm('Are you sure you want to approve this claim?')">
                                                 <i class="fas fa-check"></i> Approve
                                             </button>
-                                            
-                                            <button type="submit" name="action" value="reject" class="btn-reject"
-                                                    onclick="return confirm('Are you sure you want to reject this claim?')">
-                                                <i class="fas fa-times"></i> Reject
-                                            </button>
                                         </form>
+
+                                        <button type="button" class="btn-reject"
+                                                onclick="openRejectModal(<?= $claim['application_id'] ?>)">
+                                            <i class="fas fa-times"></i> Reject
+                                        </button>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -286,6 +302,62 @@ include '../HADER_SIDER_FOOTER/HST.PHP';
     <footer class="footer">
         <p>&copy; 2025 MyPetakom System. All rights reserved. | Advisor Dashboard</p>
     </footer>
+    <!-- CR-04-001: Reject Claim Modal (advisor enters a rejection reason) -->
+    <div id="rejectModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-times-circle"></i> Reject Merit Claim</h3>
+                <span class="close" onclick="closeRejectModal()">&times;</span>
+            </div>
+            <form method="POST" id="rejectForm">
+                <input type="hidden" name="action" value="reject">
+                <input type="hidden" name="application_id" id="reject_application_id">
+
+                <div class="form-group">
+                    <label for="rejection_reason">Reason for Rejection *</label>
+                    <textarea name="rejection_reason" id="rejection_reason" rows="4" required
+                              placeholder="e.g. Supporting document does not match the event, certificate is unclear, claim already awarded, etc."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" onclick="closeRejectModal()">Cancel</button>
+                    <button type="submit" class="btn-confirm-reject">
+                        <i class="fas fa-times"></i> Confirm Reject
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+    // CR-04-001: open/close the rejection-reason modal
+    function openRejectModal(applicationId) {
+        document.getElementById('reject_application_id').value = applicationId;
+        document.getElementById('rejection_reason').value = '';
+        document.getElementById('rejectModal').style.display = 'flex';
+    }
+
+    function closeRejectModal() {
+        document.getElementById('rejectModal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside the box
+    window.addEventListener('click', function (e) {
+        const modal = document.getElementById('rejectModal');
+        if (e.target === modal) {
+            closeRejectModal();
+        }
+    });
+
+    // Require a non-empty reason before submitting
+    document.getElementById('rejectForm').addEventListener('submit', function (e) {
+        const reason = document.getElementById('rejection_reason').value.trim();
+        if (reason === '') {
+            alert('Please enter a reason for rejecting this claim.');
+            e.preventDefault();
+        }
+    });
+    </script>
 </body>
 </html>
 <?php
